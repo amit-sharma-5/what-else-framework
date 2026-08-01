@@ -89,7 +89,7 @@ From all collected input, identify:
 ### Step 3 — Select dimensions
 
 Fetch each relevant dimension file from:
-`https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/dimensions/<name>.md`
+`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/dimensions/<name>.md`
 
 Select based on detected technologies:
 - `api.md` — if HTTP endpoints are present
@@ -119,7 +119,7 @@ Classify each finding:
 ### Step 5 — Generate EDR
 
 Fetch the template from:
-`https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/templates/engineering-decision-record.md`
+`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/templates/engineering-decision-record.md`
 
 Fill in:
 - What was built (from the input)

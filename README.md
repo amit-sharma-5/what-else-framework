@@ -1,41 +1,80 @@
-# What-Else-Review
+# What-Else Framework
 
-An AI-assisted engineering review workflow that runs **after implementation**.
+A contextual questioning framework that improves **engineering decision quality** at every stage of the development lifecycle.
 
-Its goal is not to find coding bugs or replace code review.
-
-Its purpose is to answer one question:
-
-> **What else should we have considered?**
-
-Every review produces an **Engineering Decision Record (EDR)** that lives next to the code it describes.
+> **The job of this framework is not to answer questions.**
+> Its job is to make sure you don't forget to ask them.
 
 ---
 
-## Why
+## The Problem
 
-Most engineering workflows end after implementation, tests, and PR merge.
-Over time, valuable context is lost: assumptions, trade-offs, operational concerns, known limitations.
+Engineering decisions are made continuously — during design, implementation, incident reviews, and architectural choices.
+
+Most of them go undocumented. The context, assumptions, trade-offs, and alternatives are lost.
 
 Months later, teams ask:
 - Why wasn't this logged?
 - Why wasn't idempotency implemented?
 - What happens if the downstream service is unavailable?
+- Why was Kafka chosen over RabbitMQ?
 
-The answers are usually undocumented.
+The answers exist. They just were never written down.
+
+---
+
+## The Framework
+
+```
+                    What-Else Framework
+
+                ┌─────────────────────────┐
+                │          Idea           │
+                └──────────┬──────────────┘
+                           │
+        ┌──────────────────┼─────────────────────┐
+        │                  │                     │
+      RFC                 ADR                Feature
+        │                  │                     │
+        └──────────────────┼─────────────────────┘
+                           │
+                     Implementation
+                           │
+                      Code Review
+                           │
+                           ▼
+                Engineering Decision Record
+```
+
+The same questioning applies at every stage. The artifact changes. The thinking does not.
+
+---
+
+## How It Works
+
+You write the RFC, ADR, feature, or incident report.
+
+The framework — or an AI skill — asks: **What else?**
+
+You answer the questions that matter. The document gets better.
+
+The framework does not generate documentation. It challenges it.
 
 ---
 
 ## Structure
 
 ```
-what-else-review/
-  README.md
-  skills/
-    what-else-review.md       # Claude Code skill
-  templates/
-    engineering-decision-record.md
-  dimensions/
+what-else-framework/
+
+  frameworks/
+    rfc.md          ← What Else before building
+    adr.md          ← What Else before deciding
+    feature.md      ← What Else after implementing
+    bugfix.md       ← What Else after fixing
+    incident.md     ← What Else after an outage
+
+  dimensions/       ← Review heuristics per technology
     api.md
     database.md
     events.md
@@ -45,107 +84,90 @@ what-else-review/
     performance.md
     concurrency.md
     operations.md
-  examples/
+    data-integrity.md
+    testing-strategy.md
+
+  skills/           ← AI skills that apply the framework
+    what-else-review.md
+
+  templates/        ← Output artifacts
+    engineering-decision-record.md
 ```
 
 ---
 
-## Workflow
+## Skills
 
-```
-Feature / Bug Complete
-        ↓
-Run What-Else-Review Skill
-        ↓
-Engineering Decision Record (EDR)
-        ↓
-Developer
-    ├── Fix now (critical)
-    ├── Create follow-up task (debt)
-    └── Accept trade-off (documented)
-```
+### `/what-else-review` — first implemented skill
 
-EDRs live in `/edrs/` inside the service repo they describe.
+Runs after a feature or bug fix is complete. Reads a diff, detects technologies, selects relevant dimensions, and produces an **Engineering Decision Record (EDR)**.
 
----
-
-## Installation
-
-### Option 1 — Global (recommended)
-
-Available as `/what-else-review` in every Claude Code session on your machine:
-
+**Install globally (one command):**
 ```bash
 curl -o ~/.claude/commands/what-else-review.md \
-  https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/skills/what-else-review.md
+  https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/skills/what-else-review.md
 ```
 
-Then invoke with:
+**Usage:**
 ```
-/what-else-review
-```
-
-### Option 2 — Per project
-
-Available only in a specific project:
-
-```bash
-mkdir -p .claude/commands
-curl -o .claude/commands/what-else-review.md \
-  https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/skills/what-else-review.md
+/what-else-review --pr https://github.com/org/service/pull/42
+/what-else-review --tickets https://jira.../PAM-5163 --services service-a service-b
+/what-else-review --branch feat/payment-api --dry-run
 ```
 
-### Option 3 — No install, reference by URL
+| Argument | Description |
+|----------|-------------|
+| `--tickets <url>...` | Jira ticket URLs (requires Jira MCP) |
+| `--pr <url>` | GitHub PR URL |
+| `--branch <name>` | Branch name |
+| `--services <name>...` | Restrict to named services only |
+| `--context "<text>"` | Extra context the diff can't show |
+| `--proto <path\|url>` | Proto/OpenAPI spec for cross-service review |
+| `--output <path>` | Override EDR output directory |
+| `--dry-run` | Print EDR without writing file |
 
-Paste this into any Claude Code session:
-
-```
-Fetch and follow https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/skills/what-else-review.md
-Then review this diff: <paste diff here>
-```
-
-### Updating
-
-Re-run the same `curl` command to get the latest version.
-
----
-
-## Input
-
-Feed the skill any combination of:
-- `git diff main..feature-branch`
-- Relevant proto/interface definitions for cross-service boundaries
-- A brief description of the feature
-
-The skill detects technologies used and selects relevant review dimensions automatically.
-
----
-
-## What the skill does NOT do
-
-- Replace static analysis or security scanners
-- Replace human code review
-- Focus on formatting or style
-- Run on every PR — run once per feature/bug when complete
-
----
-
-## EDR placement
-
-EDRs belong next to the code they describe:
-
+EDRs are saved versioned by timestamp next to the code they describe:
 ```
 your-service/
-  src/
   edrs/
-    2026-08-01-payment-http-grpc-integration.md
+    2026-08-01-1430-payment-http-grpc.md
+    2026-08-01-1600-payment-http-grpc.md   ← re-run after fixes
 ```
 
 ---
 
-## Success criteria
+## Dimensions
 
-1. Engineers spend less than 10 minutes reviewing an EDR.
-2. Every feature leaves behind useful engineering context.
-3. Future engineers can understand why decisions were made.
-4. Recurring gaps surface across EDRs over time.
+Dimensions are the reusable review heuristics. Each dimension is a set of "What Else?" questions for a specific technology or concern.
+
+The AI skill auto-selects relevant dimensions based on what it detects in the diff. Engineers can also apply them manually during design and review.
+
+---
+
+## Works Without AI
+
+The framework is AI-independent by design.
+
+```
+What Else?
+
+  Database      Security      Operations
+  Reliability   Performance   Failure modes
+  Observability Migration     Alternatives
+  Trade-offs    Unknowns
+```
+
+AI automates the asking. The framework is the thinking.
+
+---
+
+## Roadmap
+
+- [x] `what-else-review` skill — feature/PR review → EDR
+- [ ] `what-else-adr` skill — challenge ADRs
+- [ ] `what-else-rfc` skill — challenge RFCs
+- [ ] `what-else-incident` skill — post-incident review
+- [ ] Framework templates for RFC, ADR, incident
+
+> Skills are added as the framework is validated with real use.
+> See `what-else-framework.md` for the full vision.

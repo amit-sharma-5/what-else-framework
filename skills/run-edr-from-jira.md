@@ -33,9 +33,9 @@ I want to run a What-Else-Review on a completed feature and generate Engineering
 4. For each owned service, run the What-Else-Review skill.
    Fetch the skill instructions and supporting files from the GitHub repo:
 
-   Skill:      https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/skills/what-else-review.md
-   Template:   https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/templates/engineering-decision-record.md
-   Dimensions: https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/dimensions/
+   Skill:      https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/skills/what-else-review.md
+   Template:   https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/templates/engineering-decision-record.md
+   Dimensions: https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/dimensions/
 
    Available dimension files: api.md, database.md, events.md, observability.md,
    reliability.md, security.md, performance.md, concurrency.md, operations.md
