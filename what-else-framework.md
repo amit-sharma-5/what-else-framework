@@ -25,27 +25,28 @@ That distinction keeps the framework lightweight, reusable, and AI-independent.
 ## Where It Applies
 
 ```
-                    What-Else Framework
-
-                ┌─────────────────────────┐
-                │          Idea           │
-                └──────────┬──────────────┘
-                           │
-        ┌──────────────────┼─────────────────────┐
-        │                  │                     │
-      RFC                 ADR                Feature
-        │                  │                     │
-        └──────────────────┼─────────────────────┘
-                           │
-                     Implementation
-                           │
-                      Code Review
-                           │
-                           ▼
-                Engineering Decision Record
+        Idea
+          │
+          ▼
+        RFC ◄── What Else? (challenges the design)
+          │
+          ▼
+        ADR ◄── What Else? (challenges the decision)
+          │
+          ▼
+   Implementation
+          │
+          ▼
+    Code Review
+          │
+          ▼
+        EDR ◄── What Else? (captures what was missed)
+          │
+          ▼
+  Bug Fix / Incident ◄── What Else? (surfaces systemic gaps)
 ```
 
-The same questions surface at every stage — the artifact changes, the thinking does not.
+The same questioning applies at every stage. The artifact changes. The thinking does not.
 
 ---
 

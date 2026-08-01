@@ -36,22 +36,22 @@ All arguments are optional. With no arguments, the skill expects input pasted in
 
 **From Jira tickets (most common):**
 ```
-/what-else-review --tickets https://hellofresh.atlassian.net/browse/PAM-5163 https://hellofresh.atlassian.net/browse/PAM-5164 --services service-a service-b
+/what-else-review --tickets https://your-org.atlassian.net/browse/PROJ-123 https://your-org.atlassian.net/browse/PROJ-124 --services service-a service-b
 ```
 
 **From a PR:**
 ```
-/what-else-review --pr https://github.com/org/service-a/pull/42 --context "HTTP endpoint backed by gRPC in billing-service"
+/what-else-review --pr https://github.com/your-org/your-service/pull/42 --context "HTTP endpoint backed by gRPC in downstream-service"
 ```
 
 **From a branch with a service contract:**
 ```
-/what-else-review --branch feat/payment-api --contract ./api/payment.proto
+/what-else-review --branch feat/your-feature --contract ./api/contract.proto
 ```
 
 **Dry run before committing:**
 ```
-/what-else-review --pr https://github.com/org/service-a/pull/42 --dry-run
+/what-else-review --pr https://github.com/your-org/your-service/pull/42 --dry-run
 ```
 
 **Inline (no arguments):**
@@ -63,8 +63,8 @@ Feature: HTTP endpoint in service-a backed by gRPC call to service-b
 Diff:
 <paste diff here>
 
-gRPC contract:
-<paste proto here>
+Service contract:
+<paste proto or OpenAPI spec here>
 ```
 
 ---
@@ -153,7 +153,7 @@ If `--dry-run` is set, print the EDR and ask: "Save to file?"
 - Lead with a one-paragraph summary of the review
 - Include `Dimensions applied: <list>` immediately after the summary so engineers can spot a missed dimension
 - Always include `## Engineer Notes` as the last section with a single placeholder entry. Engineers append corrections, clarifications, or context the AI could not see.
-- Findings must be actionable and specific ("add a timeout on the gRPC call in service-a", not "consider timeouts")
+- Findings must be actionable and specific ("add a deadline on the outbound gRPC call", not "consider timeouts")
 - Keep the full EDR under 2 pages
 - After writing, print a summary:
   - Service name

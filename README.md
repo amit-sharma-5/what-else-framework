@@ -26,24 +26,25 @@ The answers exist. They just were never written down.
 ## The Framework
 
 ```
-                    What-Else Framework
-
-                ┌─────────────────────────┐
-                │          Idea           │
-                └──────────┬──────────────┘
-                           │
-        ┌──────────────────┼─────────────────────┐
-        │                  │                     │
-      RFC                 ADR                Feature
-        │                  │                     │
-        └──────────────────┼─────────────────────┘
-                           │
-                     Implementation
-                           │
-                      Code Review
-                           │
-                           ▼
-                Engineering Decision Record
+        Idea
+          │
+          ▼
+        RFC ◄── What Else? (challenges the design)
+          │
+          ▼
+        ADR ◄── What Else? (challenges the decision)
+          │
+          ▼
+   Implementation
+          │
+          ▼
+    Code Review
+          │
+          ▼
+        EDR ◄── What Else? (captures what was missed)
+          │
+          ▼
+  Bug Fix / Incident ◄── What Else? (surfaces systemic gaps)
 ```
 
 The same questioning applies at every stage. The artifact changes. The thinking does not.
@@ -118,7 +119,7 @@ curl -o ~/.claude/commands/what-else-review.md \
 **Usage:**
 ```
 /what-else-review --pr https://github.com/org/service/pull/42
-/what-else-review --tickets https://jira.../PAM-5163 --services service-a service-b
+/what-else-review --tickets https://your-org.atlassian.net/browse/PROJ-123 --services service-a service-b
 /what-else-review --branch feat/payment-api --dry-run
 ```
 
