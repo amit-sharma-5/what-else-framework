@@ -67,7 +67,7 @@ The framework does not generate documentation. It challenges it.
 ```
 what-else-framework/
 
-  frameworks/
+  frameworks/       ← (roadmap) per-stage questioning guides
     rfc.md          ← What Else before building
     adr.md          ← What Else before deciding
     feature.md      ← What Else after implementing
@@ -92,6 +92,13 @@ what-else-framework/
 
   templates/        ← Output artifacts
     engineering-decision-record.md
+
+  examples/         ← Real EDRs showing the framework in use
+
+  architectural-review-reports/  ← Framework's own self-review history
+
+  CONTRIBUTING.md   ← How to add or extend dimensions
+  SECURITY.md       ← EDR sensitivity and URL trust guidance
 ```
 
 ---
@@ -122,7 +129,8 @@ curl -o ~/.claude/commands/what-else-review.md \
 | `--branch <name>` | Branch name |
 | `--services <name>...` | Restrict to named services only |
 | `--context "<text>"` | Extra context the diff can't show |
-| `--proto <path\|url>` | Proto/OpenAPI spec for cross-service review |
+| `--contract <path\|url>` | Service contract — proto, OpenAPI, or AsyncAPI spec |
+| `--trusted-domain <host>` | Add trusted hostname for `--contract` URL validation |
 | `--output <path>` | Override EDR output directory |
 | `--dry-run` | Print EDR without writing file |
 

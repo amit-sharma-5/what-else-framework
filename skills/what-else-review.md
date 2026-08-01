@@ -1,6 +1,6 @@
 # Skill: What-Else-Review
 
-**Skill version:** v1.2.0 | Dimensions: v1.0.0
+**Skill version:** v1.3.0 | Dimensions: v1.0.0 | Template: v1.3.0
 > Note: `--proto` was renamed to `--contract` in v1.1.0.
 > To upgrade dimensions, update the version tag in Step 3 and re-run affected EDRs.
 
@@ -126,7 +126,9 @@ Classify each finding:
 ### Step 5 — Generate EDR
 
 Fetch the template from the pinned release:
-`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/v1.0.0/templates/engineering-decision-record.md`
+`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/v1.3.0/templates/engineering-decision-record.md`
+<!-- Template pinned to v1.3.0 (tracks skill version — template is output contract).
+     Dimensions pinned to v1.0.0 (review heuristics — upgraded separately and deliberately). -->
 
 Fill in:
 - What was built (from the input)
