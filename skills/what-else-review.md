@@ -1,6 +1,6 @@
 # Skill: What-Else-Review
 
-**Skill version:** v1.3.0 | Dimensions: v1.0.0 | Template: v1.3.0
+**Skill version:** v1.4.0 | Dimensions: v1.0.0 | Template: v1.3.0
 > Note: `--proto` was renamed to `--contract` in v1.1.0.
 > To upgrade dimensions, update the version tag in Step 3 and re-run affected EDRs.
 
@@ -96,7 +96,7 @@ From all collected input, identify:
 
 Fetch each relevant dimension file from the pinned release:
 `https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/v1.0.0/dimensions/<name>.md`
-<!-- Dimensions pinned to v1.0.0. Skill is at v1.2.0. These are versioned independently — skill fixes do not force a dimension upgrade. To upgrade dimensions, update this tag and re-run affected EDRs. -->
+<!-- Dimensions pinned to v1.0.0. Skill is at v1.4.0. These are versioned independently — skill fixes do not force a dimension upgrade. To upgrade dimensions, update this tag and re-run affected EDRs. -->
 
 Select based on detected technologies:
 - `api.md` — if HTTP endpoints are present
