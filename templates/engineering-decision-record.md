@@ -1,11 +1,22 @@
 # Engineering Decision Record
 
 **Feature:** <!-- short name -->
-**Date:** <!-- YYYY-MM-DD -->
+**Date:** <!-- YYYY-MM-DD HH:mm -->
 **Author:** <!-- your name -->
 **Status:** <!-- draft | reviewed | accepted -->
 **Related PRs:** <!-- links -->
 **Services touched:** <!-- list services, include cross-service boundaries -->
+**Previous:** <!-- filename of prior EDR run, or "first run" -->
+
+---
+
+## What Changed
+<!-- Only on re-runs. What was fixed since the previous EDR, and what is new this run. -->
+<!-- Remove this section on first run. -->
+
+| Finding | Previous status | This run |
+|---------|----------------|----------|
+|         |                |          |
 
 ---
 

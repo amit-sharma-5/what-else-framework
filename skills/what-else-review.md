@@ -75,7 +75,13 @@ Fill in the EDR template (`templates/engineering-decision-record.md`) with:
 - Observability section based on what is or isn't present in the diff
 
 Output the completed EDR as markdown.
-Suggest a filename: `edrs/YYYY-MM-DD-short-feature-name.md`
+
+Each run creates a new versioned file:
+`edrs/YYYY-MM-DD-HHmm-short-feature-name.md`
+
+Example: `edrs/2026-08-01-1430-payment-http-grpc.md`
+
+If a previous EDR exists for the same feature, read it first and include a `## What Changed` section at the top of the new file summarising what was resolved since the last run and what is new. Link to the previous version with `Previous: <filename>`.
 
 ---
 
