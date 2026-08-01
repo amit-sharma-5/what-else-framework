@@ -69,6 +69,47 @@ EDRs live in `/edrs/` inside the service repo they describe.
 
 ---
 
+## Installation
+
+### Option 1 — Global (recommended)
+
+Available as `/what-else-review` in every Claude Code session on your machine:
+
+```bash
+curl -o ~/.claude/commands/what-else-review.md \
+  https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/skills/what-else-review.md
+```
+
+Then invoke with:
+```
+/what-else-review
+```
+
+### Option 2 — Per project
+
+Available only in a specific project:
+
+```bash
+mkdir -p .claude/commands
+curl -o .claude/commands/what-else-review.md \
+  https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/skills/what-else-review.md
+```
+
+### Option 3 — No install, reference by URL
+
+Paste this into any Claude Code session:
+
+```
+Fetch and follow https://raw.githubusercontent.com/amit-sharma-5/what-else-review/main/skills/what-else-review.md
+Then review this diff: <paste diff here>
+```
+
+### Updating
+
+Re-run the same `curl` command to get the latest version.
+
+---
+
 ## Input
 
 Feed the skill any combination of:
