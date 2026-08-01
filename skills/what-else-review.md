@@ -19,7 +19,7 @@ Focus only on: what else should have been considered?
 | `--branch <name>` | Branch name. Run `git pull` then `git diff origin/main...<name>`. | `--branch feat/payment-api` |
 | `--services <name>...` | Restrict review to named services only. Skip all others. | `--services service-a service-b` |
 | `--context "<text>"` | Free-text context the diff cannot show: cross-service contracts, business rules, constraints. | `--context "HTTP calls gRPC in service-b"` |
-| `--proto <path\|url>` | Path or URL to a proto/OpenAPI spec for cross-service boundary review. | `--proto ./api/payment.proto` |
+| `--contract <path\|url>` | Local path or trusted URL (github.com, your internal VCS) to a service contract — proto, OpenAPI spec, or AsyncAPI schema. External URLs outside trusted domains are rejected. | `--contract ./api/payment.proto` |
 | `--output <path>` | Override the default EDR output directory (`edrs/`). | `--output ./docs/edrs` |
 | `--dry-run` | Print the EDR to screen. Do not write any file. | `--dry-run` |
 
@@ -39,9 +39,9 @@ All arguments are optional. With no arguments, the skill expects input pasted in
 /what-else-review --pr https://github.com/org/service-a/pull/42 --context "HTTP endpoint backed by gRPC in billing-service"
 ```
 
-**From a branch with proto:**
+**From a branch with a service contract:**
 ```
-/what-else-review --branch feat/payment-api --proto ./api/payment.proto
+/what-else-review --branch feat/payment-api --contract ./api/payment.proto
 ```
 
 **Dry run before committing:**
@@ -74,7 +74,7 @@ Read the arguments provided. If none, expect inline input below the command.
 - `--pr`: run `gh pr diff <url>` to get the diff.
 - `--branch`: run `git pull` then `git diff origin/main...<branch>`.
 - `--services`: after collecting all diffs, filter to only the named services. Do not generate an EDR for any service not listed.
-- `--proto`: read the file or fetch the URL and treat as cross-service contract context.
+- `--contract`: if a local path, read the file directly. If a URL, validate it is from a trusted domain (github.com, gitlab.com, or your internal VCS hostname). Reject and warn if the URL is from an unknown external domain. Treat content as cross-service contract context.
 - `--context`: append to the feature description used during review.
 - `--output`: use this path instead of `<service-repo-root>/edrs/` when writing the EDR file.
 - `--dry-run`: complete all review steps but print the EDR instead of writing it. Ask the user if they want to save it before stopping.
@@ -88,8 +88,8 @@ From all collected input, identify:
 
 ### Step 3 — Select dimensions
 
-Fetch each relevant dimension file from:
-`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/dimensions/<name>.md`
+Fetch each relevant dimension file from the pinned release:
+`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/v1.0.0/dimensions/<name>.md`
 
 Select based on detected technologies:
 - `api.md` — if HTTP endpoints are present
@@ -118,8 +118,8 @@ Classify each finding:
 
 ### Step 5 — Generate EDR
 
-Fetch the template from:
-`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/templates/engineering-decision-record.md`
+Fetch the template from the pinned release:
+`https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/v1.0.0/templates/engineering-decision-record.md`
 
 Fill in:
 - What was built (from the input)
