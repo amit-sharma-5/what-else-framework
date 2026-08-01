@@ -150,6 +150,7 @@ If `--dry-run` is set, print the EDR and ask: "Save to file?"
 - Produce the EDR as a markdown file ready to commit
 - Lead with a one-paragraph summary of the review
 - Include `Dimensions applied: <list>` immediately after the summary so engineers can spot a missed dimension
+- Always include `## Engineer Notes` as the last section with a single placeholder entry. Engineers append corrections, clarifications, or context the AI could not see.
 - Findings must be actionable and specific ("add a timeout on the gRPC call in service-a", not "consider timeouts")
 - Keep the full EDR under 2 pages
 - After writing, print a summary:

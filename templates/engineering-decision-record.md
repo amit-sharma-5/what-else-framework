@@ -122,3 +122,12 @@
 
 - 
 - 
+
+## Engineer Notes
+
+<!-- Free-form human context: corrections to AI findings, team discussion outcomes,
+     decisions made outside the diff, anything the AI couldn't know.
+     Append entries, never overwrite. -->
+<!-- Format: [YYYY-MM-DD @author] note -->
+
+- 
