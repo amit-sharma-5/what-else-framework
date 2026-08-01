@@ -35,10 +35,19 @@ Local dimension files follow the same format as core dimensions. They are merged
 
 ## Versioning
 
-- Core dimensions are released as GitHub tags (e.g. `v1.0.0`)
-- The skill file specifies which dimension version it fetches
+This repo uses [Semantic Versioning](https://semver.org): `MAJOR.MINOR.PATCH`
+
+| Change | Version bump | Examples |
+|--------|-------------|---------|
+| Breaking change — argument renamed/removed, template structure changed | **MAJOR** `X.0.0` | `--proto` → `--contract` rename |
+| New functionality — new argument, new dimension, new template section | **MINOR** `x.Y.0` | `--trusted-domain` added, `Engineer Notes` added |
+| Bug fix — stale comment, doc sync, diagram fix, version header correction | **PATCH** `x.y.Z` | Fixing wrong version comment, README alignment |
+
+**Rules:**
+- Tag and skill version header are bumped in the same commit
+- Dimensions and template are pinned independently in the skill (dimensions = review heuristics, template = output contract)
+- Breaking changes require a migration note in the skill header
 - A new dimension release is cut when a meaningful set of changes accumulates
-- Patch releases (`v1.0.1`) for corrections; minor releases (`v1.1.0`) for new dimensions or significant additions
 
 ---
 
@@ -46,9 +55,10 @@ Local dimension files follow the same format as core dimensions. They are merged
 
 The skill (`skills/what-else-review.md`) is versioned independently from dimensions.
 
-- Skill version tracks in the file header: `**Skill version:** vX.Y.Z`
+- Skill version tracks in the file header: `**Skill version:** vX.Y.Z | Dimensions: vA.B.C | Template: vX.Y.Z`
 - Breaking argument changes (rename, removal) require a migration note in the header
-- Dimension version used by the skill is pinned explicitly and updated deliberately
+- Template version tracks skill major version — they share the same output contract
+- Dimension version is pinned separately — only updated when review heuristics change
 
 ---
 
