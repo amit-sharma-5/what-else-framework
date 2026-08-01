@@ -74,6 +74,9 @@
 
 - 
 
+<!-- To mark a finding resolved without a full re-run, add inline: -->
+<!-- - [resolved YYYY-MM-DD, PR #N] <original finding> -->
+
 ## Known Limitations
 
 <!-- Current constraints that future engineers should know about. -->
@@ -108,6 +111,14 @@
 ## Open Questions
 
 <!-- Unresolved questions at time of writing. -->
+
+- 
+- 
+
+## Outcome
+
+<!-- Fill in after action is taken. Tracks whether findings were acted on. -->
+<!-- Format: finding → fixed in PR #N | deferred to ticket Y | accepted (reason) -->
 
 - 
 - 

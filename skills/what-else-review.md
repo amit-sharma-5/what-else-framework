@@ -1,5 +1,9 @@
 # Skill: What-Else-Review
 
+**Skill version:** v1.2.0 | Dimensions: v1.0.0
+> Note: `--proto` was renamed to `--contract` in v1.1.0.
+> To upgrade dimensions, update the version tag in Step 3 and re-run affected EDRs.
+
 ## Purpose
 
 Run a structured engineering review on a completed feature or bug fix.
@@ -20,6 +24,7 @@ Focus only on: what else should have been considered?
 | `--services <name>...` | Restrict review to named services only. Skip all others. | `--services service-a service-b` |
 | `--context "<text>"` | Free-text context the diff cannot show: cross-service contracts, business rules, constraints. | `--context "HTTP calls gRPC in service-b"` |
 | `--contract <path\|url>` | Local path or trusted URL (github.com, your internal VCS) to a service contract — proto, OpenAPI spec, or AsyncAPI schema. External URLs outside trusted domains are rejected. | `--contract ./api/payment.proto` |
+| `--trusted-domain <host>` | Add a trusted hostname for `--contract` URL validation. Use for self-hosted VCS (Bitbucket, Gitea, Azure DevOps). | `--trusted-domain git.internal.company.com` |
 | `--output <path>` | Override the default EDR output directory (`edrs/`). | `--output ./docs/edrs` |
 | `--dry-run` | Print the EDR to screen. Do not write any file. | `--dry-run` |
 
@@ -73,8 +78,9 @@ Read the arguments provided. If none, expect inline input below the command.
 - `--tickets`: fetch each ticket via Jira MCP. Extract summary, description, linked PRs/branches, services mentioned.
 - `--pr`: run `gh pr diff <url>` to get the diff.
 - `--branch`: run `git pull` then `git diff origin/main...<branch>`.
-- `--services`: after collecting all diffs, filter to only the named services. Do not generate an EDR for any service not listed.
-- `--contract`: if a local path, read the file directly. If a URL, validate it is from a trusted domain (github.com, gitlab.com, or your internal VCS hostname). Reject and warn if the URL is from an unknown external domain. Treat content as cross-service contract context.
+- `--services`: after collecting all diffs, filter to only the named services. Do not generate an EDR for any service not listed. If services are found in the diff that are not in the filter, print: `Skipped: <name> (not in --services filter). Intentional?`
+- `--contract`: if a local path, read the file directly. If a URL, validate it is from a trusted domain (github.com, gitlab.com, or any host added via `--trusted-domain`). Reject and warn if the URL is from an unknown external domain. Treat content as cross-service contract context.
+- `--trusted-domain`: add this hostname to the trusted domain list for `--contract` URL validation. Can be specified multiple times.
 - `--context`: append to the feature description used during review.
 - `--output`: use this path instead of `<service-repo-root>/edrs/` when writing the EDR file.
 - `--dry-run`: complete all review steps but print the EDR instead of writing it. Ask the user if they want to save it before stopping.
@@ -90,6 +96,7 @@ From all collected input, identify:
 
 Fetch each relevant dimension file from the pinned release:
 `https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/v1.0.0/dimensions/<name>.md`
+<!-- Dimensions pinned to v1.0.0. Skill is at v1.2.0. These are versioned independently — skill fixes do not force a dimension upgrade. To upgrade dimensions, update this tag and re-run affected EDRs. -->
 
 Select based on detected technologies:
 - `api.md` — if HTTP endpoints are present
@@ -142,6 +149,7 @@ If `--dry-run` is set, print the EDR and ask: "Save to file?"
 
 - Produce the EDR as a markdown file ready to commit
 - Lead with a one-paragraph summary of the review
+- Include `Dimensions applied: <list>` immediately after the summary so engineers can spot a missed dimension
 - Findings must be actionable and specific ("add a timeout on the gRPC call in service-a", not "consider timeouts")
 - Keep the full EDR under 2 pages
 - After writing, print a summary:

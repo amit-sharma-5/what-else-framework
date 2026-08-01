@@ -95,6 +95,9 @@ what-else-framework/
 
 ### RFC — What Else before building?
 
+**Trigger:** Author runs before sharing the RFC for team review.
+**Output:** Annotated version of the RFC with gaps and unanswered questions added inline. Not a new document.
+
 Instead of asking: *Does this design work?*
 Ask: *What else?*
 
@@ -112,6 +115,9 @@ The AI does not write the RFC. It challenges it. You answer the questions that m
 ---
 
 ### ADR — What Else before deciding?
+
+**Trigger:** Decision made but not yet implemented. Run before the ADR is merged.
+**Output:** Gaps and open questions added to the ADR itself. The ADR author resolves or explicitly accepts each one before merging.
 
 Traditional ADR:
 ```
@@ -149,6 +155,9 @@ Produces an Engineering Decision Record (EDR).
 ---
 
 ### Incident — What Else after an outage?
+
+**Trigger:** After the incident is resolved and root cause identified. Run before the postmortem is written.
+**Output:** Extended postmortem with systemic gaps captured, not just the immediate fix.
 
 Instead of stopping at root cause, ask:
 
