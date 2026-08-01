@@ -101,6 +101,8 @@ Select based on detected technologies:
 - `performance.md` — if data retrieval or heavy operations are present
 - `concurrency.md` — if shared state, locking, or parallel operations are present
 - `operations.md` — if deployment, cron, or rollback concerns exist
+- `data-integrity.md` — if writes span multiple services or distributed consistency is involved
+- `testing-strategy.md` — always include
 
 Skip dimensions that clearly do not apply. Do not generate noise.
 

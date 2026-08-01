@@ -17,3 +17,12 @@
 - Does auth context propagate from HTTP into the downstream call (gRPC, MQ, etc.)?
 - Is trace context (correlation ID) forwarded?
 - Does the HTTP layer handle downstream failures gracefully (timeout, 503, partial response)?
+
+## Additional checks
+
+- Is the HTTP method semantically correct? (GET is safe and idempotent, POST is not)
+- Is API versioning in place? What breaks for existing consumers if the schema changes?
+- Are response caching headers set correctly (Cache-Control, ETag)?
+- Is there a consumer-driven contract test for shared APIs?
+- Is rate limiting applied — both for performance and to prevent abuse?
+- Are CORS headers configured if this endpoint is browser-facing?

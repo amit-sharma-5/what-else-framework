@@ -11,3 +11,4 @@
 - Are inputs sanitized to prevent injection (SQL, command, template)?
 - Are there any new secrets or credentials? Are they managed (not hardcoded)?
 - Does this feature expose more data than the caller needs?
+- Are third-party dependencies checked for known vulnerabilities (CVE / `go mod audit` / `npm audit`)?

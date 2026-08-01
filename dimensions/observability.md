@@ -16,3 +16,14 @@
 - Does trace context flow from HTTP → gRPC → DB?
 - Are downstream call latencies measured separately from total request latency?
 - Is the upstream caller identifiable in logs of the downstream service?
+
+## Logging quality
+
+- Are logs structured (JSON / key-value)? No free-text log lines that can't be queried.
+- Is log level used correctly? ERROR for actionable failures, WARN for unexpected-but-recoverable, INFO for key business events.
+- Are errors logged with stack trace and enough context to reproduce?
+
+## Sampling and cost
+
+- Is trace sampling rate configured? 100% sampling in production is expensive at scale.
+- Is there an SLO defined for this feature? If not, what metric would alert on it?

@@ -9,3 +9,5 @@
 - Are there scheduled jobs or crons? What happens if they overlap or fail?
 - Are background tasks observable (last run, success/failure, duration)?
 - Is the deployment zero-downtime? Are DB migrations backward-compatible?
+- Is an SLO / error budget defined for this feature?
+- Has on-call been notified this feature is going live? Is there a handoff note?

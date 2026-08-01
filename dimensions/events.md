@@ -16,3 +16,9 @@
 - What happens if the broker is unavailable at publish time?
 - What happens if the consumer is down for 1 hour? 1 day?
 - Is there an alert on DLQ depth or consumer lag?
+
+## Additional checks
+
+- Is the delivery guarantee explicit — at-least-once or exactly-once? Is the consumer designed for whichever applies?
+- Is there backpressure handling — what happens when the consumer is slower than the producer?
+- Is the consumer group name stable? Renaming it triggers a full replay from the earliest offset.

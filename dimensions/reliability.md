@@ -15,3 +15,8 @@
 - Are deadlines propagated from the HTTP request into the gRPC call?
 - If the gRPC service is unavailable, does the HTTP endpoint return a useful error or hang?
 - Is there a fallback if the gRPC response is partial or malformed?
+
+## Additional checks
+
+- Is the health check / readiness probe updated to reflect the new dependency?
+- Is there load shedding — does the service reject requests gracefully under spike rather than queuing indefinitely?
