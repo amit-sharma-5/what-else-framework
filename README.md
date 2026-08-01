@@ -113,6 +113,12 @@ Runs after a feature or bug fix is complete. Reads a diff, detects technologies,
 **Install globally (one command):**
 ```bash
 curl -o ~/.claude/commands/what-else-review.md \
+  https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/v2.0.0/skills/what-else-review.md
+```
+
+To always get the latest (may include unreleased changes):
+```bash
+curl -o ~/.claude/commands/what-else-review.md \
   https://raw.githubusercontent.com/amit-sharma-5/what-else-framework/main/skills/what-else-review.md
 ```
 
@@ -180,3 +186,15 @@ AI automates the asking. The framework is the thinking.
 
 > Skills are added as the framework is validated with real use.
 > See `what-else-framework.md` for the full vision.
+
+---
+
+## Releases
+
+See [GitHub Releases](https://github.com/amit-sharma-5/what-else-framework/releases) for the full changelog.
+
+| Component | Current version |
+|-----------|----------------|
+| Skill | v2.0.0 |
+| Dimensions | v1.0.0 |
+| Template | v2.0.0 |
